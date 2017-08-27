@@ -72,6 +72,21 @@
           </div>
 
           <div class="section">
+            <p class="section-title">Rayon du polygone de controle (bézier)</p>
+            <p class="mention">Arc uniquement</p>            
+            <fieldset>
+              <div class="half">
+                <label>Min</label>
+                <input type="number" name="tron-cubicR-min">
+              </div>
+              <div class="half">
+                <label>Max</label>
+                <input type="number" name="tron-cubicR-max">
+              </div>
+            </fieldset>             
+          </div>
+
+          <div class="section">
             <p class="section-title">Ramification</p>
             <fieldset>
               <div class="param">
@@ -104,14 +119,6 @@
 
         <h3>Branches</h3>
         <div class="accordion-display">
-          <div class="section">
-            <fieldset>
-              <div class="param">
-                <label>Alternation</label>
-                <input type="checkbox" name="branch-alternante" value="1" disabled>
-              </div>
-            </fieldset>             
-          </div>
 
           <div class="section">
             <p class="section-title">Largeur</p>
@@ -168,6 +175,31 @@
             </fieldset>             
           </div>
 
+          <div class="section">
+            <p class="section-title">Largeur minimum (px)</p>
+            <fieldset>
+              <div class="half">
+                <label>Max</label>
+                <input type="number" name="branch-minWeight">
+              </div>
+            </fieldset>             
+          </div>
+
+          <div class="section">
+            <p class="section-title">Rayon du polygone de controle (bézier)</p>
+            <p class="mention">Arc uniquement</p>
+            <fieldset>
+              <div class="half">
+                <label>Min</label>
+                <input type="number" name="branch-cubicR-min">
+              </div>
+              <div class="half">
+                <label>Max</label>
+                <input type="number" name="branch-cubicR-max">
+              </div>
+            </fieldset>             
+          </div>
+
            <div class="section">
             <p class="section-title">Ramification</p>
             <fieldset>
@@ -212,6 +244,10 @@
                   <label>Rect</label>
                   <input type="radio" value="1" name="general-constructor">
                 </div>
+                <div class="half">
+                  <label>Arc</label>
+                  <input type="radio" value="2" name="general-constructor">
+                </div>
               </fieldset>             
             </div>
           </div>
@@ -223,9 +259,9 @@
     <script src="assets/js/GeoShape.js" type="text/javascript"></script>
     <script src="assets/js/Triangle.js" type="text/javascript"></script>
     <script src="assets/js/Rectangle.js" type="text/javascript"></script>
+    <script src="assets/js/Arc.js" type="text/javascript"></script>
 
     <script src="assets/js/Branch.js" type="text/javascript"></script>
-    <script src="assets/js/Triangle.js" type="text/javascript"></script>
 
     <script src="assets/js/TreeManager.js" type="text/javascript"></script>
     <script src="assets/js/config.js" type="text/javascript"></script>

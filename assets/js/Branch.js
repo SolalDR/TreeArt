@@ -8,7 +8,7 @@ function Branch(args){
 	this.side = args.side; // 0 pour left, 1 pour right;  
 	this.constructor = args.constructor;
 	this.branches = []; //childs
-
+	this.additionnalDatas = {}; //Objet vide passé en argument du constructeur de forme (utile pour les arcs)
 	this.length; //Length of the branch
 	this.weight; //Weight of the branch
 	this.rotate; //rotation of the branch from parent
@@ -24,7 +24,8 @@ function Branch(args){
 	} else {
 		this.calcFromParent();
 	}
-	if(this.weight > 5) {
+	console.log(TreeManager.params.branch.minWeight);
+	if(this.weight > TreeManager.params.branch.minWeight) {
 		this.create();
 	}
 }
@@ -42,6 +43,14 @@ Branch.prototype = {
 			base: [this.ctxW/2, 0],
 			top: [this.ctxW/2, this.length]
 		}
+
+		//Si c'est un objet Arc, les rayon d'action des point du polygone de controle de bézier sont nul pour garantir un tronc droit
+		if( this.shape == SHAPE_ARC) {
+			this.additionnalDatas.cubicR = {
+				rp1: 0, 
+				rp2: 0
+			}
+		}
 	},
 
 	calcFromParent: function(){
@@ -51,7 +60,8 @@ Branch.prototype = {
 			length : randomBetween(TreeManager.params.branch.length.min, TreeManager.params.branch.length.max)/100,
 			rotate : randomBetween(TreeManager.params.branch.rotate.min, TreeManager.params.branch.rotate.max)
 		}
-		if( this.parent.status = TYPE_TRON ) { rand.rotate = randomBetween(TreeManager.params.tron.rotate.min, TreeManager.params.tron.rotate.max); }
+		if( this.parent.status === TYPE_TRON ) { rand.rotate = randomBetween(TreeManager.params.tron.rotate.min, TreeManager.params.tron.rotate.max); }
+
 		this.weight = parent.weight*rand.weight;  
 		this.length = parent.length*rand.length;
 		this.rotate = (this.side === 0)? -1*rand.rotate : rand.rotate;
@@ -130,7 +140,8 @@ Branch.prototype = {
 			height: this.length, 
 			position: this.coord.base, 
 			rotate: this.ctxRotate,
-			origin: ["50%", 0]
+			origin: ["50%", 0], 
+			params: this.additionnalDatas
 		});
 		this.canvasEl.draw();
 		this.generateBranches();

@@ -21,6 +21,15 @@ table {
 	font-size: 1em;
 }
 
+h1 {
+	text-align: center;
+	font-weight: 100;
+	text-transform: uppercase;
+	font-size: 20px;
+	letter-spacing: 5px;
+
+}
+
 .ui-draggable, .ui-droppable {
 	background-position: top;
 }
@@ -35,6 +44,22 @@ table {
 	border-radius: 10px;
 	max-height: calc(100vh - 20px);
 	overflow: scroll;
+	transition:.5s;
+}
+
+.tree-controller.closed {
+	width: 35px;
+	height: 35px;
+	border-radius: 10px;
+}
+
+.tree-controller.closed .tree-controller-title {
+	width: 35px; 
+	border-radius: 10px;
+}
+
+.tree-controller.closed #toggle-settings {
+	border-radius: 10px;
 }
 
 .tree-controller * {
@@ -55,10 +80,34 @@ table {
 	position: fixed;
 	width: 300px;
 	box-sizing: border-box;
+	transition:.5s;
 }
 
 #settings-accordion {
 
+}
+
+#toggle-settings {
+	position: fixed;
+	right: 10px;
+	top: 10px;
+	background-color: #000;
+	width: 35px;
+	height: 35px;
+	border-top-right-radius: 10px;
+	border-left: 1px solid #7b7b7b;
+	background-size: 40%;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.tree-controller.closed #toggle-settings {
+	background-image: url(../img/settings.png);
+	background-size: 60%;
+}
+
+.tree-controller.open #toggle-settings {
+	background-image: url(../img/close.png);
 }
 
 #settings-accordion h3 {

@@ -47,16 +47,33 @@ TreeManager = {
 	},
 
 	initOptions: function(){
+		var self = this;
+
 		this.generate = document.getElementById("generate");
 		this.clear = document.getElementById("clear");
+		this.btnToggle = document.getElementById("toggle-settings");
+		this.optionDisplayed = false;
+		this.optionPanel = document.querySelector(".tree-controller");
+
 		this.constructorRadios = document.querySelectorAll("input[name='general-constructor'");
 		for(i=0; i<this.constructorRadios.length; i++ ){
 			this.changeConstructor(this.constructorRadios[i]);
 		}
 
+		this.btnToggle.addEventListener("click", function(e){
+			e.preventDefault();
+			console.log("click");
+			if(self.optionDisplayed) {
+				self.optionPanel.className =  self.optionPanel.className.replace("open", "closed");
+				self.optionDisplayed = false; 
+			} else {
+				self.optionPanel.className =  self.optionPanel.className.replace("closed", "open");
+				self.optionDisplayed = true;
+			}
+			return false;
+		})
 
 		this.options = document.querySelectorAll("input");
-		var self = this;
 
 		this.generate.addEventListener("click", function(){
 			self.createTron();

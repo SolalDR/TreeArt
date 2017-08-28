@@ -21,6 +21,7 @@ GeoShape = function(context, args){
 		canvas: [], // Coords of the shape in the convas context (y inversed)
 		origin: [] // Coords calculated from the origin
 	};
+
 	this.ctxW = this.ctx.canvas.clientWidth;
 	this.ctxH = this.ctx.canvas.clientHeight;
 }
@@ -39,7 +40,7 @@ GeoShape.prototype = {
 		this.position[1] = percentToPx(this.position[1], this.ctxH);
 	},
 
-		//Calc coord in context to transform orthonormal; 
+	//Calc coord in context to transform orthonormal; 
 	calcCtxCoord: function(){
 		for(i=0; i< this.coord.orthonormal.length; i++){
 			this.coord.canvas[i] = [this.coord.orthonormal[i][0], this.ctxH - this.coord.orthonormal[i][1]]; 
@@ -65,6 +66,31 @@ GeoShape.prototype = {
 			for(i=0; i<this.coord.shape.length; i++){
 				this.coord.orthonormal[i] = [this.coord.origin[i][0]+this.position[0], this.coord.origin[i][1]+this.position[1]]; 
 			}
+		}
+	},
+
+	setStrokeStyle: function(){
+		if(Array.isArray(this.strokeColor)) {
+			var lineargradient = this.ctx.createLinearGradient(this.coord.canvas[0][0], this.coord.canvas[0][1], this.coord.canvas[1][0], this.coord.canvas[1][1]);
+			for(i=0; i<this.strokeColor.length; i++) {
+				lineargradient.addColorStop(i, this.strokeColor[i]);
+			}
+			this.ctx.strokeStyle = lineargradient;
+		} else {
+			this.ctx.strokeStyle = this.strokeColor; 
+		}
+		this.ctx.strokeStyle = this.strokeColor;
+	},
+
+	setFillStyle: function(){
+		if(Array.isArray(this.fillColor)) {
+			var lineargradient = this.ctx.createLinearGradient(this.coord.canvas[0][0], this.coord.canvas[0][1], this.coord.canvas[1][0], this.coord.canvas[1][1]);
+			for(i=0; i<this.fillColor.length; i++) {
+				lineargradient.addColorStop(i, this.fillColor[i]);
+			}
+			this.ctx.fillStyle = lineargradient;
+		} else {
+			this.ctx.fillStyle = this.fillColor; 
 		}
 	},
 

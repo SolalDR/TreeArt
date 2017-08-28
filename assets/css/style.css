@@ -184,6 +184,11 @@ h1 {
 	margin-bottom: 20px;
 }
 
+#settings-accordion .accordion-display .section select, #settings-accordion .accordion-display .section option {
+	color: black;
+}
+
+
 #generate, #clear  {
 	display: block;
 	background-color: #333;

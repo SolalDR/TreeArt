@@ -1,4 +1,38 @@
+
 function findRadio(name){
+	var inputs = document.querySelectorAll("input[name='"+name+"']");
+	for(i=0; i<inputs.length; i++){
+		if( inputs[i].checked ){
+			return inputs[i].value; 
+		}
+	}
+} 
+
+function setSelectValue(name){
+	var inputs = document.querySelectorAll("input[name='"+name+"']");
+	for(i=0; i<inputs.length; i++){
+		if( inputs[i].checked ){
+			return inputs[i].value; 
+		}
+	}
+} 
+
+
+// Node.prototype.setValue = function(value){
+// 	if( this.tagName == "SELECT") {
+// 		console.log(this.options);
+// 		for(i=0; i<this.options.length; i++){
+// 			console.log(this.options[i], this.options[i].value, value);
+// 			if( this.options[i].value == value) {
+// 				this.selectedIndex = i;
+// 			}
+// 		}
+// 		return;
+// 	} 
+// 	this.setAttribute("value", value);
+// }
+
+function getSelectValue(name){
 	var inputs = document.querySelectorAll("input[name='"+name+"']");
 	for(i=0; i<inputs.length; i++){
 		if( inputs[i].checked ){
@@ -63,8 +97,14 @@ TreeManager = {
 		var self = this;
 		var name = option.getAttribute('name');
 		if( name === "general-constructor") { return; } // Si il s'agit du constructeur on quitte 
+		
+		//Récupère le chemin vers le paramètre correspondant
 		var path = this.formatPath(option.getAttribute('name').split("-")); 
-		var value = (path[2]) ? self.params[path[0]][path[1]][path[2]] : self.params[path[0]][path[1]];
+
+		//Récupère la valeure du chemin et l'attribut à l'option correspondante
+		var value = (path[2] || !isNaN(path[2])) ? self.params[path[0]][path[1]][path[2]] : self.params[path[0]][path[1]];
+		if(option.type == "checkbox") { value = option.checked; }
+		if(name == "general-gradientDirection") {console.log(value);}
 		option.setAttribute("value", value);
 
 		option.addEventListener("change", function(){
@@ -75,7 +115,8 @@ TreeManager = {
 				}
 			}
 			var value = (!isNaN(parseInt(this.value))) ? parseInt(this.value) : this.value;
-			console.log(value);
+			if(option.type == "checkbox") { value = option.checked; }
+
 			if( path[2] || path[2] === 0 ){
 				self.params[path[0]][path[1]][path[2]] = value; 
 				console.log(self.params, path[0], path[1], path[2], self.params[path[0]][path[1]][path[2]]);
@@ -128,7 +169,7 @@ TreeManager = {
 		this.clear = document.getElementById("clear"); 						// Néttoie l'arbre
 		this.btnToggle = document.getElementById("toggle-settings");		// Affiche / Cache les options
 		this.optionPanel = document.querySelector(".tree-controller");		// Paneau d'option
- 		this.options = document.querySelectorAll("input");					// Tableau d'option
+ 		this.options = document.querySelectorAll("input, select");					// Tableau d'option
 
         if(!this.canvas) { console.warn("Canvas don't exist"); return; }	// Erreur canvas
     	this.context = this.canvas.getContext('2d');						//Récupère le contexte du canvas

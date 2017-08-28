@@ -13,13 +13,15 @@ Triangle.prototype.draw = function(){
 		this.ctx.moveTo(this.coord.canvas[0][0], this.coord.canvas[0][1]);
 		this.ctx.lineTo(this.coord.canvas[1][0], this.coord.canvas[1][1]);
 		this.ctx.lineTo(this.coord.canvas[2][0], this.coord.canvas[2][1]);
+
 		if(this.fill){
-			this.ctx.fillStyle = this.fillColor;
+			this.setFillStyle();
 			this.ctx.fill();
 			return; 
 		}
-		this.ctx.closePath()
-		this.ctx.strokeStyle = this.strokeColor;
+		this.ctx.closePath();
+
+		this.setStrokeStyle();
 		this.ctx.stroke();
 		return;
 	} 

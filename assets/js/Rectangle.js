@@ -5,7 +5,7 @@ function Rectangle(context, args) {
 }
 Rectangle.prototype = Object.create(GeoShape.prototype); 
 Rectangle.prototype.calcShapeCoord = function(){
-	this.coord.shape = [ [0,0], [this.width, 0], [this.width, this.height], [0, this.height] ];
+	this.coord.shape = [ [0,0], [0, this.height], [this.width, this.height], [this.width, 0] ];
 };
 Rectangle.prototype.draw = function(){
 	if(this.ctx){
@@ -15,12 +15,13 @@ Rectangle.prototype.draw = function(){
 		this.ctx.lineTo(this.coord.canvas[2][0], this.coord.canvas[2][1]);
 		this.ctx.lineTo(this.coord.canvas[3][0], this.coord.canvas[3][1]);
 		if(this.fill){
-			this.ctx.fillStyle = this.fillColor;
+			this.setFillStyle();
 			this.ctx.fill();
 			return; 
 		}
-		this.ctx.closePath()
-		this.ctx.strokeStyle = this.strokeColor;
+		this.ctx.closePath();
+		this.setStrokeStyle();
+		this.ctx.stroke();
 		this.ctx.stroke();
 		return;
 	} 

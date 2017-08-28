@@ -231,6 +231,43 @@
           </div>
         </div>
         
+        <h3>Couleures</h3>
+        <div class="accordion-display">
+
+          <div class="section">
+            <p class="section-title">Dégradé général</p>
+            <p class="mention">(Si coché, le dégradé est étendu sur l'ensemble de l'arbre)</p>
+            <fieldset>
+              <input type="checkbox" name="general-gradientRepeat">
+            </fieldset>             
+          </div> 
+
+          <div class="section">
+            <p class="section-title">Direction</p>
+            <fieldset>
+              <select name="general-gradientDirection">
+                <option value="top">Bottom - Top</option>
+                <option value="right">Left - Right</option>
+              </select>
+            </fieldset>             
+          </div>
+
+          <div class="section">
+            <p class="section-title">Nombre de couleurs</p>
+            <fieldset>
+              <input type="number" name="general-limitColor">
+            </fieldset>             
+          </div>
+          <div class="section">
+              <p class="section-title">Couleurs gradient</p>
+              <fieldset>
+                <input type="color" name="general-colors-0">
+                <input type="color" name="general-colors-1">
+                <input type="color" name="general-colors-2">
+              </fieldset>             
+            </div>
+          </div>
+
         <h3>Général</h3>
         <div class="accordion-display">
           <div class="section">
@@ -252,8 +289,8 @@
             </div>
           </div>
         </div>
-      <a id="generate" href="#">Générate your tree</a>
-      <a id="clear" href="#">Clear your tree</a>
+      <a id="generate" href="#">Générer arbre</a>
+      <a id="clear" href="#">Nettoyer canvas</a>
     </div>
     <script src="assets/js/Maths.js" type="text/javascript"></script>
     <script src="assets/js/GeoShape.js" type="text/javascript"></script>

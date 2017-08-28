@@ -44,7 +44,10 @@ TreeManager.params = {
 		count : [20, 20, 20, 20, 20] // Tableau de probabilité du nombre de branches, ici autant de chance d'avoir 0, 1, 2, 3, 4 branches; 
 	}, 
 	general : {
-		colors : ["#000000"], 
-		constructor: SHAPE_TRIANGLE
+		colors : ["#28cc9e", "#ffdd83", "#0000FF"], 
+		limitColor: 1, 
+		constructor: SHAPE_TRIANGLE, 
+		gradientDirection: "right", 
+		gradientRepeat: false
 	}
 }

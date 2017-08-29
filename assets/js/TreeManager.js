@@ -17,21 +17,6 @@ function setSelectValue(name){
 	}
 } 
 
-
-// Node.prototype.setValue = function(value){
-// 	if( this.tagName == "SELECT") {
-// 		console.log(this.options);
-// 		for(i=0; i<this.options.length; i++){
-// 			console.log(this.options[i], this.options[i].value, value);
-// 			if( this.options[i].value == value) {
-// 				this.selectedIndex = i;
-// 			}
-// 		}
-// 		return;
-// 	} 
-// 	this.setAttribute("value", value);
-// }
-
 function getSelectValue(name){
 	var inputs = document.querySelectorAll("input[name='"+name+"']");
 	for(i=0; i<inputs.length; i++){
@@ -106,7 +91,6 @@ TreeManager = {
 		if(option.type == "checkbox") { value = option.checked; }
 		if(name == "general-gradientDirection") {console.log(value);}
 		option.setAttribute("value", value);
-
 		option.addEventListener("change", function(){
 			var n = this.getAttribute("name"); 
 			for(i=0; i<path.length; i++){
@@ -161,6 +145,20 @@ TreeManager = {
 
 	},
 
+	loadSettings: function(r){
+		document.getElementById("settings-accordion").innerHTML = r; 
+		TreeManager.options = document.querySelectorAll("input, select");					// Tableau d'option
+		$( function() {
+          $( "#settings-accordion" ).accordion({
+            heightStyle: "content", 
+            collapsible: true, 
+            active: false
+          });
+        });
+		TreeManager.switchConstructor();											// Selon this.shape détermine le constructeur de forme (Triangle, Rectangle)
+        TreeManager.initEvents();	
+	},
+
 	init:function(args){
 		this.canvas = args.canvas;
 		this.shape = args.shape; 
@@ -169,13 +167,16 @@ TreeManager = {
 		this.clear = document.getElementById("clear"); 						// Néttoie l'arbre
 		this.btnToggle = document.getElementById("toggle-settings");		// Affiche / Cache les options
 		this.optionPanel = document.querySelector(".tree-controller");		// Paneau d'option
- 		this.options = document.querySelectorAll("input, select");					// Tableau d'option
 
         if(!this.canvas) { console.warn("Canvas don't exist"); return; }	// Erreur canvas
     	this.context = this.canvas.getContext('2d');						//Récupère le contexte du canvas
         if(!this.context) { console.warn("Context don't exist"); return; }	// Erreur context
 
-        this.switchConstructor();											// Selon this.shape détermine le constructeur de forme (Triangle, Rectangle)
-        this.initEvents();													// Initialise les évenements
+
+		var r = new Request({
+			url:'settings.html', 
+			callback: TreeManager.loadSettings
+		}); 
+		r.send();												// Initialise les évenements
 	}
 }

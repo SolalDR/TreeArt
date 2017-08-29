@@ -92,23 +92,19 @@ Branch.prototype = {
 		} else if(colors.length>1) {
 			var a = this.coord.base;  var b = [this.ctxW/2, 0]; //Point de départ et d'arrivé
 			var d = Math.sqrt( Math.pow(b[0] - a[0], 2) + Math.pow(b[1] - a[1] , 2) ); // Distance entre les deux points
-			var r = this.ctxH*.5;  // rayon d'action du dégradé
+			 
+			var r = TreeManager.params.general.gradientLimit/100*this.ctxH; // rayon d'action du dégradé
 			var rat0 = ((d/r) > 1) ? 1 : d/r; 		// Ratio de progression du dégradé
 			var rat1 = ((d+this.length)/r>1) ? 1 : (d+this.length)/r ; 		// Ratio de progression du dégradé
 
-
-			var slice0 = numSlice(rat0, colors.length, r);
-			var slice1 = numSlice(rat0, colors.length, r);
+			var slice0 = numSlice(rat0, colors.length, 1);
+			var slice1 = numSlice(rat1, colors.length, 1);
 
 			var newColors = []; 
-			// if( slice0 != slice1 ){
-			// 	var diff = slice1 - slice0; 
-			// 	for(i=0; i<diff; i++){
-
-			// 	}
-			// } else {
-				this.colors.push(colorBetween(rat0, colors[slice0], colors[slice0+1]));
-				this.colors.push(colorBetween(rat1, colors[slice1], colors[slice1+1]));
+			var next = (colors[slice0+1]) ? colors[slice0+1]: colors[slice0]; 
+			this.colors.push(colorBetween(rat0, colors[slice0], next));
+			next = (colors[slice1+1]) ? colors[slice1+1]: colors[slice1]; 
+			this.colors.push(colorBetween(rat1, colors[slice1], colors[slice1+1]));
 			// }
 		} else {
 			this.colors = colors[0];
@@ -151,7 +147,6 @@ Branch.prototype = {
 			}, j*100)
 			side = (side===0) ? 1 : 0;
 		}
-
 	},
 
 	create: function(){

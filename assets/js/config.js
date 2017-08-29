@@ -20,10 +20,6 @@ TreeManager.params = {
 	},
 	branch : {
 		alternate: 100, // Probabilité que les branches apparaissent alternativement d'un coté puis de l'autre d'une branche
-		weight : {
-			min: 1, //Epaisseur minimum en px
-			max: 70 //Epaisseur maximum en px
-		}, 
 		rotate : {
 			min: 10, //Rotation minimum en degré d'une branche par rapport à son parent
 			max: 45 //Rotation maximum en degré d'une branche par rapport à son parent
@@ -45,9 +41,10 @@ TreeManager.params = {
 	}, 
 	general : {
 		colors : ["#28cc9e", "#ffdd83", "#0000FF"], 
-		limitColor: 1, 
+		limitColor: 3, 
 		constructor: SHAPE_TRIANGLE, 
 		gradientDirection: "right", 
-		gradientRepeat: false
+		gradientRepeat: false, 
+		gradientLimit : 100
 	}
 }

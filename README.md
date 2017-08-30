@@ -9,6 +9,16 @@ Il est séparer en trois sections de controle
 - Tronc
 - Branches
 - Générales
+ 
+### Le tronc
+|            Nom           | Unité | Description                                                                                                                                                                                                                                                                                                                   |
+|:------------------------:|-------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Largeur                  | %     | Définis la largeur minimum et maximum du tronc. Les valeurs sont exprimé en pourcentage par rapport à la largeur du canvas.                                                                                                                                                                                                   |
+| Longueur                 | %     | Définis la longueur minimum et maximum du tronc. Les valeurs sont exprimé en pourcentage par rapport à la longueur du canvas.                                                                                                                                                                                                 |
+| Rotation                 | deg   | Définis la rotation minimum et maximum du tronc par rapport à sa base. Une rotation de 0 correspond à un tronc parfaitement vertical. Les valeurs conseillé sont compris entre 0 et 90. Le sens dans lequel penche le tronc est aléatoire.                                                                                    |
+| Rayon polygone de bézier | %     | Paramètre utilisé uniquement pour les formes de type Arc. La courbe étant généré par une courbe de bézier cubique, deux points de contrôle sont définis. La valeur correspond donc aux distances minimum et maximum entre l'une des extrémité et son point de contrôle. La valeur est exprimé en pourcentage par rapport à :  |
+| Ramification             |       | Correspond à l'ensemble des probabilité d'obtenir une branche de "n" ramification. Plus une jauge est importante plus les chances d'obtenir le nombre de branches indiqué est grand.   
+
 
 ### Générer un arbre
 Générer un arbre permet de créer un tronc et toute les ramifications en découlant. Il est possible de créer plusieurs arbres superposé qui visuellement en donneront que un. Ce fait permet de créer des arbres plus complexes en exécutant le script plusieurs fois avec des matrices de paramètres différentes.
